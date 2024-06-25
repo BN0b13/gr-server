@@ -1,6 +1,6 @@
 import { Gpio } from 'onoff';
 
-const PowerOutlet = new Gpio(21, 'out');
+const PowerOutlet = new Gpio(533, 'out');
 
 class PowerService {
 
