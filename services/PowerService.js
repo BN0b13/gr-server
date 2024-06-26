@@ -14,7 +14,7 @@ class PowerService {
         }, time);
 
         return {
-            message: `Pumps will cycle for ${time/100} seconds`
+            message: `Pumps will cycle for ${time/1000} seconds`
         }
     }
 }
