@@ -7,11 +7,10 @@ class PowerService {
     async outletStatus() {
         const outletStatus = await PowerOutlet.read();
         return {
-            outletStatus
+            outletStatus,
+            message: `Outlet is currently ${outletStatus === 1 ? 'on' : 'off'}`,
+            status: 200
         };
-        // return {
-        //     outletStatus: outletStatus === 1 ? 'On' : 'Off'
-        // };
     }
 
     async cycleOutletOnOff(time) {
