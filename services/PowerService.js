@@ -4,8 +4,16 @@ const PowerOutlet = new Gpio(533, 'out');
 
 class PowerService {
 
-    async cycleDownstairsPumps(time) {
-        console.log('Turning on pumps...');
+    async outletStatus() {
+        const outletStatus = PowerOutlet.read();
+        return {
+            outletStatus: outletStatus === 1 ? 'On' : 'Off'
+        };
+    }
+
+    async cycleOutletOnOff(time) {
+        const message = `Pumps will cycle for ${time/1000} seconds`;
+        console.log(message);
         PowerOutlet.writeSync(1);
 
         setTimeout(() => {
@@ -14,7 +22,8 @@ class PowerService {
         }, time);
 
         return {
-            message: `Pumps will cycle for ${time/1000} seconds`
+            message,
+            status: 200
         }
     }
 }

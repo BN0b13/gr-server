@@ -15,13 +15,18 @@ class PowerController {
         res.send(data);
     }
 
-    async cyclePumps(req, res) {
+    async outletStatus(req, res) {
+        const data = await powerService.outletStatus();
+        res.send(data);
+    }
+
+    async cycleOutletOnOff(req, res) {
         console.log('Cycle Pumps initiated...');
         const {
             time = 10000
         } = req.query;
 
-        const data = await powerService.cycleDownstairsPumps(time);
+        const data = await powerService.cycleOutletOnOff(time);
 
         res.send(data);
     }
