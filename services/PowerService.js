@@ -5,7 +5,7 @@ const PowerOutlet = new Gpio(533, 'out');
 class PowerService {
 
     async outletStatus() {
-        const outletStatus = PowerOutlet.read();
+        const outletStatus = await PowerOutlet.read();
         return {
             outletStatus
         };
