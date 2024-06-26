@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = express.Router();
 
-import { AdminTokenVerifier } from '../middleware/adminTokenVerifier.js';
+import { ApiKeyVerifier } from '../middleware/apiKeyVerifier.js';
 import { HandleErrors } from '../middleware/errorHandler.js';
 
 import PowerController from '../controllers/PowerController.js';
@@ -17,10 +17,10 @@ const powerController = new PowerController();
 
 // Power
 
-router.get('/', AdminTokenVerifier, HandleErrors(powerController.health));
+router.get('/', ApiKeyVerifier, HandleErrors(powerController.health));
 
-router.get('/outlet-status', AdminTokenVerifier, HandleErrors(powerController.outletStatus));
+router.get('/outlet-status', ApiKeyVerifier, HandleErrors(powerController.outletStatus));
 
-router.get('/cycle-outlet/on-off', AdminTokenVerifier, HandleErrors(powerController.cycleOutletOnOff));
+router.get('/cycle-outlet/on-off', ApiKeyVerifier, HandleErrors(powerController.cycleOutletOnOff));
 
 export default router;

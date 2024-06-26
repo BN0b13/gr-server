@@ -4,8 +4,8 @@ import {
     UnauthorizedError
 } from '../errors/index.js';
 
-export const AdminTokenVerifier = async (req, res, next) => {
-    const apiKey = req.headers.apiKey ? req.headers.apiKey : false;
+export const ApiKeyVerifier = async (req, res, next) => {
+    const apiKey = req.headers.apikey ? req.headers.apikey : false;
 
     if(!apiKey) {
         const error = new UnauthorizedError()
