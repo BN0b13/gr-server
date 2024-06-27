@@ -7,8 +7,23 @@ class LogsController {
     // READ
 
     async getLogs(req, res) {
-        const data = await logsRepository.getLogs();
+        const { 
+            search = null, 
+            page = 0, 
+            size = 10,
+            sortKey = 'createdAt',
+            sortDirection = 'ASC'
+        } = req.query;
 
+        const params = {
+            sortKey,
+            sortDirection,
+            page,
+            size
+        };
+
+        const data = await logsRepository.getLogs(params);
+        
         res.send(data);
     }
 
@@ -20,7 +35,22 @@ class LogsController {
     }
 
     async getWateringLogs(req, res) {
-        const data = await logsRepository.getWateringLogs();
+        const { 
+            search = null, 
+            page = 0, 
+            size = 10,
+            sortKey = 'createdAt',
+            sortDirection = 'ASC'
+        } = req.query;
+
+        const params = {
+            sortKey,
+            sortDirection,
+            page,
+            size
+        };
+
+        const data = await logsRepository.getWateringLogs(params);
 
         res.send(data);
     }

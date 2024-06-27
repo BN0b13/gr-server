@@ -4,9 +4,16 @@ class LogsRepository {
 
     // READ
 
-    async getLogs() {
+    async getLogs({ sortKey = 'createdAt', sortDirection = 'ASC', size = 10, page = 0 }) {
         try {
-            const res = await Logs.findAndCountAll({});
+            const res = await Logs.findAndCountAll({
+                order: [
+                    [sortKey, sortDirection],
+                ],
+                limit: size,
+                offset: page
+            });
+
             return res;
         } catch (err) {
             console.log('Get Logs Error: ', err);
@@ -21,6 +28,7 @@ class LogsRepository {
                     id
                 }
             });
+
             return res;
         } catch (err) {
             console.log('Get Log By ID Error: ', err);
@@ -28,13 +36,19 @@ class LogsRepository {
         }
     }
 
-    async getWateringLogs() {
+    async getWateringLogs({ sortKey = 'createdAt', sortDirection = 'ASC', size = 10, page = 0 }) {
         try {
             const res = await Logs.findAndCountAll({
                 where: {
                     type: 'watering cycle'
-                }
+                },
+                order: [
+                    [sortKey, sortDirection],
+                ],
+                limit: size,
+                offset: page
             });
+
             return res;
         } catch (err) {
             console.log('Get Watering Logs Error: ', err);
@@ -47,6 +61,7 @@ class LogsRepository {
     async createLog(data) {
         try {
             const res = await Logs.create(data);
+
             return res;
         } catch (err) {
             console.log('CREATE Log Error: ', err);
@@ -63,6 +78,7 @@ class LogsRepository {
                     id
                 }
             });
+            
             return {
                 deleteRes: res,
                 status: 200
