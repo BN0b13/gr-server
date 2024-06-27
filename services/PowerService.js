@@ -1,6 +1,8 @@
 import { Gpio } from 'onoff';
+import LogsRepository from '../repository/LogsRepository.js';
 
 const PowerOutlet = new Gpio(533, 'out');
+const logsRepository = new LogsRepository;
 
 class PowerService {
 
@@ -23,9 +25,24 @@ class PowerService {
             PowerOutlet.writeSync(0);
         }, time);
 
+        const data = {
+            type: 'watering cycle',
+            location: 'grow room 1',
+            duration: `${time/1000} seconds`,
+            time,
+            notes: {
+                ph: '',
+                ppm: '',
+                temperature: ''
+            }
+        }
+
+        const res = await logsRepository.createLog(data);
+
         return {
             message,
-            status: 200
+            status: 200,
+            res
         }
     }
 }
