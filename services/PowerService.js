@@ -15,7 +15,7 @@ class PowerService {
         };
     }
 
-    async cycleOutletOnOff(time) {
+    async cycleOutletOnOff(time = 10000) {
         const message = `Pumps will cycle for ${time/1000} seconds`;
         console.log(message);
         PowerOutlet.writeSync(1);
