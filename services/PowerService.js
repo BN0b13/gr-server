@@ -1,7 +1,7 @@
 import { Gpio } from 'onoff';
 import LogsRepository from '../repository/LogsRepository.js';
 
-const PowerOutlet = new Gpio(533, 'out');
+const PowerOutlet = new Gpio(516, 'out');
 const logsRepository = new LogsRepository;
 
 class PowerService {
